@@ -20,7 +20,7 @@ jobs:
         run: |
           echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
-          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+          echo "branch=$(echo '${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}' | sed 's#/#-#')" >> $GITHUB_ENV
 
       # Build Docker image and Export
       - name: Build & export docker image
@@ -50,7 +50,7 @@ jobs:
         run: |
           echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
           echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
-          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_ENV
+          echo "branch=$(echo '${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}' | sed 's#/#-#')" >> $GITHUB_ENV
 
       # Build Docker image and Export
       - name: Build & export docker image
