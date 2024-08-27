@@ -13,8 +13,7 @@ WORKDIR /builder/mountpoint-s3
 # hadolint ignore=SC1091
 RUN . "$HOME/.cargo/env" \
     && sed --in-place 's/aws_thread_id_t = 0/aws_thread_id_t = std::ptr::null_mut()/' mountpoint-s3-crt/src/s3/client.rs \
-    && cargo build --release \
-    && mv 
+    && cargo build --release 
 
 FROM $baseImage
 ENV TZ=Asia/Jakarta
